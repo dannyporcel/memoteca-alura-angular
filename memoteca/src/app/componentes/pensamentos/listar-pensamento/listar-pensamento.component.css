@@ -1,0 +1,33 @@
+.mural {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+.botao{
+    margin: auto;
+  margin-top: auto;
+  width: 200px;
+
+  background-color: #154580; /* cor do fundo */
+  color: white;              /* cor do texto */
+  border: none;              /* remove borda padrão */
+  border-radius: 10px;       /* cantos arredondados */
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;  
+}
+
+.d-flex{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sem-pensamentos {
+  text-align: center;
+  padding: 2rem 0 5rem;
+}
+
+

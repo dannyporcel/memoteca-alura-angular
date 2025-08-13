@@ -1,6 +1,7 @@
-export interface Pensamento {
-    id?: string /*? é opcional */
-    conteudo: string
-    autoria: string
-    modelo: string
-}
+export interface Pensamento
+ {
+      id?: string
+      conteudo: string
+      autoria: string
+      modelo: string
+ }

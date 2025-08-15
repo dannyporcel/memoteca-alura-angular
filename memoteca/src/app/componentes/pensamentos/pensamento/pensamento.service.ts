@@ -1,6 +1,6 @@
 import { Pensamento } from './pensamento';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 @Injectable({/*injeção de dependencia */
@@ -10,14 +10,23 @@ export class PensamentoService {
   private readonly API = 'http://localhost:3000/pensamentos'
   constructor(private http: HttpClient) {
   }
-  listar(): Observable<Pensamento[]> {
-    return this.http.get<Pensamento[]>(this.API)/* pegar a lista de pensamentos da API*/
-    /*OBSERVAÇÃO
-    Para funcionar, é necessário manter ativado no terminal
-    o backend json com comando npm start na pasta /backend
-    e também iniciar o localhost em ng serve
-     */
-  }
+
+
+  listar(pagina: number, filtro: string): Observable<Pensamento[]> {
+  const itensPorPagina = 6;
+  let params = new HttpParams()
+    .set('_page', String(pagina))
+    .set('_limit', String(itensPorPagina));
+
+if (filtro.trim().length > 2) {
+  params = params.set('q', filtro);
+}
+
+  return this.http.get<Pensamento[]>(this.API, { params });
+}
+
+
+
   /*função criar */
   criar(pensamento: Pensamento): Observable<Pensamento>{
     return this.http.post<Pensamento>(this.API,pensamento)

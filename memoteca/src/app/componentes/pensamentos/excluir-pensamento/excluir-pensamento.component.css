@@ -31,21 +31,12 @@
   align-items: center;
   align-content: center;
   margin-top: 30px;
-
 }
 
 .botao {
   margin: 5px;
   margin-top: 70px;
   width: 200px;
-
-  background-color: #154580; /* cor do fundo */
-  color: white;              /* cor do texto */
-  border: none;              /* remove borda padrão */
-  border-radius: 10px;       /* cantos arredondados */
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;  
 }
 
 .botao-cancelar {

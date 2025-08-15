@@ -5,37 +5,17 @@
   justify-content: center;
   margin: 1rem 0 2rem;
 }
-.botao{
-    margin: auto;
-  margin-top: auto;
-  width: 200px;
-
-  background-color: #154580; /* cor do fundo */
-  color: white;              /* cor do texto */
-  border: none;              /* remove borda padrão */
-  border-radius: 10px;       /* cantos arredondados */
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;  
-}
-
-.d-flex{
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.sem-pensamentos {
-  text-align: center;
-  padding: 2rem 0 5rem;
-}
-
 
 .d-flex{
   display: flex;
   flex-direction: column;
   gap: 2rem;
   justify-content: center;
+}
+
+.sem-pensamentos {
+  text-align: center;
+  padding: 2rem 0 5rem;
 }
 
 .buscar-pensamentos {
@@ -102,4 +82,15 @@ input[type="search"]::-webkit-search-cancel-button {
   .buscar-pensamentos {
     width: 510px;
   }
+}
+
+
+.botoes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.botoes button {
+  margin-left: 10px;
+  margin-right: 2px;
 }

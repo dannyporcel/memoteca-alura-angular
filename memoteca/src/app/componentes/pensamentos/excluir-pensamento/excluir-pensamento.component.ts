@@ -1,7 +1,7 @@
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { PensamentoService } from './../pensamento/pensamento.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Pensamento } from '../pensamento/pensamento';
+import { Pensamento } from '../pensamento';
+import { PensamentoService } from '../pensamento/pensamento.service';
 
 @Component({
   selector: 'app-excluir-pensamento',
@@ -9,35 +9,38 @@ import { Pensamento } from '../pensamento/pensamento';
   styleUrls: ['./excluir-pensamento.component.css']
 })
 export class ExcluirPensamentoComponent implements OnInit {
-  pensamento: Pensamento  = {
-    id: '',
+
+  pensamento: Pensamento = {
+    id: 0,
     conteudo: '',
-    autoria:'',
-    modelo: ''
+    autoria: '',
+    modelo: '',
+    favorito: false
   }
 
   constructor(
     private service: PensamentoService,
     private router: Router,
     private route: ActivatedRoute
-  ) { } 
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')
-    this.service.buscarPorId(id!).subscribe((pensamento)=>{
+    this.service.buscarPorId(parseInt(id!)).subscribe((pensamento) => {
       this.pensamento = pensamento
     })
   }
-  
-  excluirPensamento(){
-    if(this.pensamento.id){
+
+  excluirPensamento() {
+    if(this.pensamento.id) {
       this.service.excluir(this.pensamento.id).subscribe(() => {
         this.router.navigate(['/listarPensamento'])
       })
-
     }
   }
-  cancelar(){
+
+  cancelar() {
     this.router.navigate(['/listarPensamento'])
   }
+
 }

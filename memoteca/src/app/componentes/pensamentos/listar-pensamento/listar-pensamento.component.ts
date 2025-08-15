@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Pensamento } from '../pensamento/pensamento';
+
+import { Component, OnInit } from '@angular/core';
+import { Pensamento } from '../pensamento';
 import { PensamentoService } from '../pensamento/pensamento.service';
 
 @Component({
@@ -8,35 +9,48 @@ import { PensamentoService } from '../pensamento/pensamento.service';
   styleUrls: ['./listar-pensamento.component.css']
 })
 export class ListarPensamentoComponent implements OnInit {
-  
-  listaPensamentos: Pensamento [] = [];
-  paginaAtual:number = 1;
-  haMaisPensamentos: boolean = true;
-  filtro: string =''
 
-  constructor(private service:PensamentoService) {}
+  listaPensamentos: Pensamento[] = [];
+  paginaAtual: number = 1;
+  haMaisPensamentos: boolean = true;
+  filtro: string = ''
+  favoritos: boolean = false;
+
+  constructor(private service: PensamentoService) { }
 
   ngOnInit(): void {
-    this.service.listar(this.paginaAtual, this.filtro).subscribe((listaPensamentos)=>{
-      this.listaPensamentos = listaPensamentos;
-    })/*consegue listar os pensamentos*/
-  }
-  carregarMaisPensamentos(){
-    this.service.listar(++this.paginaAtual, this.filtro)
-    .subscribe(listaPensamentos => {
-      this.listaPensamentos.push(...listaPensamentos);
-      if(!listaPensamentos.length){
-        this.haMaisPensamentos = false;
-      }
+    this.service.listar(this.paginaAtual, this.filtro, this.favoritos).subscribe((listaPensamentos) => {
+      this.listaPensamentos = listaPensamentos
     })
   }
-  pesquisarPensamentos() {
-  this.haMaisPensamentos = true;
-  this.paginaAtual = 1;
 
-  this.service.listar(this.paginaAtual, this.filtro)
-    .subscribe(listaPensamentos => {
-      this.listaPensamentos = listaPensamentos;
-    });
+  carregarMaisPensamentos() {
+    this.service.listar(++this.paginaAtual, this.filtro,this.favoritos)
+      .subscribe(listaPensamentos => {
+        this.listaPensamentos.push(...listaPensamentos);
+        if(!listaPensamentos.length) {
+          this.haMaisPensamentos = false
+        }
+      })
+  }
+
+  pesquisarPensamentos() {
+    this.haMaisPensamentos = true
+    this.paginaAtual = 1;
+    this.service.listar(this.paginaAtual, this.filtro,this.favoritos)
+      .subscribe(listaPensamentos => {
+        this.listaPensamentos = listaPensamentos
+      })
+  }
+
+  listarFavoritos(){
+    this.favoritos = true;
+    this.haMaisPensamentos = true
+    this.paginaAtual=1
+    this.service.listar(this.paginaAtual,this.filtro, this.favoritos)
+    .subscribe(listaPensamentosFavoritos =>{
+      this.listaPensamentos = listaPensamentosFavoritos
+    })
+  }
 }
-}
+
